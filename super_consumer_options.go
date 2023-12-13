@@ -125,9 +125,9 @@ func WithSuperConsumerOptionsExchangeName(name string) func(*SuperConsumerOption
 // WithSuperConsumerOptionsExchangeKind ensures the queue is a durable queue
 func WithSuperConsumerOptionsExchangeKind(kind string, name string) func(*SuperConsumerOptions) {
 	return func(options *SuperConsumerOptions) {
-		for _, eo := range options.ExchangeOptionsSlice {
+		for i, eo := range options.ExchangeOptionsSlice {
 			if eo.Name == name {
-				eo.Kind = kind
+				options.ExchangeOptionsSlice[i].Kind = kind
 			}
 		}
 	}
@@ -136,9 +136,9 @@ func WithSuperConsumerOptionsExchangeKind(kind string, name string) func(*SuperC
 // WithSuperConsumerOptionsExchangeDurable ensures the exchange is a durable exchange
 func WithSuperConsumerOptionsExchangeDurable(name string) func(*SuperConsumerOptions) {
 	return func(options *SuperConsumerOptions) {
-		for _, eo := range options.ExchangeOptionsSlice {
+		for i, eo := range options.ExchangeOptionsSlice {
 			if eo.Name == name {
-				eo.Durable = true
+				options.ExchangeOptionsSlice[i].Durable = true
 			}
 		}
 	}
@@ -147,9 +147,9 @@ func WithSuperConsumerOptionsExchangeDurable(name string) func(*SuperConsumerOpt
 // WithSuperConsumerOptionsExchangeAutoDelete ensures the exchange is an auto-delete exchange
 func WithSuperConsumerOptionsExchangeAutoDelete(name string) func(*SuperConsumerOptions) {
 	return func(options *SuperConsumerOptions) {
-		for _, eo := range options.ExchangeOptionsSlice {
+		for i, eo := range options.ExchangeOptionsSlice {
 			if eo.Name == name {
-				eo.AutoDelete = true
+				options.ExchangeOptionsSlice[i].AutoDelete = true
 			}
 		}
 	}
@@ -158,9 +158,9 @@ func WithSuperConsumerOptionsExchangeAutoDelete(name string) func(*SuperConsumer
 // WithSuperConsumerOptionsExchangeInternal ensures the exchange is an internal exchange
 func WithSuperConsumerOptionsExchangeInternal(name string) func(*SuperConsumerOptions) {
 	return func(options *SuperConsumerOptions) {
-		for _, eo := range options.ExchangeOptionsSlice {
+		for i, eo := range options.ExchangeOptionsSlice {
 			if eo.Name == name {
-				eo.Internal = true
+				options.ExchangeOptionsSlice[i].Internal = true
 			}
 		}
 	}
@@ -169,9 +169,9 @@ func WithSuperConsumerOptionsExchangeInternal(name string) func(*SuperConsumerOp
 // WithSuperConsumerOptionsExchangeNoWait ensures the exchange is a no-wait exchange
 func WithSuperConsumerOptionsExchangeNoWait(name string) func(*SuperConsumerOptions) {
 	return func(options *SuperConsumerOptions) {
-		for _, eo := range options.ExchangeOptionsSlice {
+		for i, eo := range options.ExchangeOptionsSlice {
 			if eo.Name == name {
-				eo.NoWait = true
+				options.ExchangeOptionsSlice[i].NoWait = true
 			}
 		}
 	}
@@ -180,9 +180,9 @@ func WithSuperConsumerOptionsExchangeNoWait(name string) func(*SuperConsumerOpti
 // WithSuperConsumerOptionsExchangeDeclare stops this library from declaring the exchanges existance
 func WithSuperConsumerOptionsExchangeDeclare(name string) func(*SuperConsumerOptions) {
 	return func(options *SuperConsumerOptions) {
-		for _, eo := range options.ExchangeOptionsSlice {
+		for i, eo := range options.ExchangeOptionsSlice {
 			if eo.Name == name {
-				eo.Declare = true
+				options.ExchangeOptionsSlice[i].Declare = true
 			}
 		}
 	}
@@ -191,9 +191,9 @@ func WithSuperConsumerOptionsExchangeDeclare(name string) func(*SuperConsumerOpt
 // WithSuperConsumerOptionsExchangePassive ensures the exchange is a passive exchange
 func WithSuperConsumerOptionsExchangePassive(name string) func(*SuperConsumerOptions) {
 	return func(options *SuperConsumerOptions) {
-		for _, eo := range options.ExchangeOptionsSlice {
+		for i, eo := range options.ExchangeOptionsSlice {
 			if eo.Name == name {
-				eo.Passive = true
+				options.ExchangeOptionsSlice[i].Passive = true
 			}
 		}
 	}
@@ -202,9 +202,9 @@ func WithSuperConsumerOptionsExchangePassive(name string) func(*SuperConsumerOpt
 // WithSuperConsumerOptionsExchangeArgs adds optional args to the exchange
 func WithSuperConsumerOptionsExchangeArgs(args Table, name string) func(*SuperConsumerOptions) {
 	return func(options *SuperConsumerOptions) {
-		for _, eo := range options.ExchangeOptionsSlice {
+		for i, eo := range options.ExchangeOptionsSlice {
 			if eo.Name == name {
-				eo.Args = args
+				options.ExchangeOptionsSlice[i].Args = args
 			}
 		}
 	}
@@ -213,9 +213,9 @@ func WithSuperConsumerOptionsExchangeArgs(args Table, name string) func(*SuperCo
 // WithSuperConsumerOptionsRoutingKey binds the queue to a routing key with the default binding options
 func WithSuperConsumerOptionsRoutingKey(routingKey string, name string) func(*SuperConsumerOptions) {
 	return func(options *SuperConsumerOptions) {
-		for _, eo := range options.ExchangeOptionsSlice {
+		for i, eo := range options.ExchangeOptionsSlice {
 			if eo.Name == name {
-				eo.Bindings = append(eo.Bindings, Binding{
+				options.ExchangeOptionsSlice[i].Bindings = append(eo.Bindings, Binding{
 					RoutingKey:     routingKey,
 					BindingOptions: getDefaultBindingOptions(),
 				})
@@ -229,9 +229,9 @@ func WithSuperConsumerOptionsRoutingKey(routingKey string, name string) func(*Su
 // the zero value. If you want to declare your bindings for example, be sure to set Declare=true
 func WithSuperConsumerOptionsBinding(binding Binding, name string) func(*SuperConsumerOptions) {
 	return func(options *SuperConsumerOptions) {
-		for _, eo := range options.ExchangeOptionsSlice {
+		for i, eo := range options.ExchangeOptionsSlice {
 			if eo.Name == name {
-				eo.Bindings = append(eo.Bindings, binding)
+				options.ExchangeOptionsSlice[i].Bindings = append(eo.Bindings, binding)
 			}
 		}
 	}
