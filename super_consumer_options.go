@@ -1,6 +1,7 @@
 package rabbitmq
 
 import (
+	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/wagslane/go-rabbitmq/internal/logger"
 )
 
@@ -117,6 +118,7 @@ func WithSuperConsumerOptionsExchangeName(name string) func(*SuperConsumerOption
 		if !isExist {
 			options.ExchangeOptionsSlice = append(options.ExchangeOptionsSlice, SuperExchangeOptions{
 				Name: name,
+				Kind: amqp.ExchangeDirect,
 			})
 		}
 	}
