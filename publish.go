@@ -356,6 +356,11 @@ func (publisher *Publisher) startPublishHandler() {
 	}()
 }
 
-func (publisher *Publisher) ExchangeDeclare(opts ExchangeOptions) error {
-	return declareExchange(publisher.chanManager, opts)
+func (publisher *Publisher) ExchangeDeclare(optionFuncs ...func(*ExchangeOptions)) error {
+	defaultOptions := getDefaultExchangeOptions()
+	options := &defaultOptions
+	for _, optionFunc := range optionFuncs {
+		optionFunc(options)
+	}
+	return declareExchange(publisher.chanManager, *options)
 }
