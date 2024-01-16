@@ -355,3 +355,7 @@ func (publisher *Publisher) startPublishHandler() {
 		}
 	}()
 }
+
+func (publisher *Publisher) ExchangeDeclare(opts ExchangeOptions) error {
+	return declareExchange(publisher.chanManager, opts)
+}

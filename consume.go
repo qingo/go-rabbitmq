@@ -210,3 +210,11 @@ func handlerGoroutine(consumer *Consumer, msgs <-chan amqp.Delivery, consumeOpti
 	}
 	consumer.options.Logger.Infof("rabbit consumer goroutine closed")
 }
+
+func (consumer *Consumer) QueueDeclare(opts QueueOptions) error {
+	return declareQueue(consumer.chanManager, opts)
+}
+
+func (consumer *Consumer) DeclareBindings(opts ConsumerOptions) error {
+	return declareBindings(consumer.chanManager, opts)
+}
